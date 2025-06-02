@@ -50,7 +50,8 @@ namespace Car_Rental_Management
 
         private void viewPaymentBtn_Click(object sender, EventArgs e)
         {
-
+            new ViewPayments().Show();
+            this.Hide();
         }
 
         private void AdminConsole_Load(object sender, EventArgs e)
