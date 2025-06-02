@@ -18,10 +18,11 @@ namespace Car_Rental_Management
             InitializeComponent();
         }
 
-        private void ViewBookings_Load(object sender, EventArgs e)
+        private void displayBookings()
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
+            // Fetching all the bookings which are pending 0 = pending, 1 = approved
             string query = @"
                         SELECT 
                             b.id AS id, 
@@ -38,7 +39,8 @@ namespace Car_Rental_Management
                             b.status AS status
                         FROM Bookings AS b
                         INNER JOIN Cars AS c ON b.carId = c.id
-                        INNER JOIN Customers AS cust ON b.customerId = cust.id";
+                        INNER JOIN Customers AS cust ON b.customerId = cust.id
+                        where b.status = 0";
 
             try
             {
@@ -68,34 +70,95 @@ namespace Car_Rental_Management
             }
             catch (Exception ex)
             {
-                // Handle any exceptions (e.g., SQL errors or connection issues)
                 MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
-                // Ensure the connection is closed
                 connection.Close();
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void ViewBookings_Load(object sender, EventArgs e)
         {
-
+            displayBookings();
         }
 
         private void approveBtn_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                DataGridViewRow row = dataGridView1.SelectedRows[0];
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                int bookingId = Convert.ToInt32(selectedRow.Cells["id"].Value);
+                string status = selectedRow.Cells["status"].Value.ToString();
+                if (status.ToLower() == "approved")
+                {
+                    MessageBox.Show("This booking is already approved.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    return;
+                }
+                SqlConnection connection = new SqlConnection(connectionString);
+                string query = "UPDATE Bookings SET status = @status WHERE id = @bookingId";
+                  try
+                    {
+                     
+                        connection.Open();
+                        SqlCommand command = new SqlCommand(query, connection);
+                        command.Parameters.AddWithValue("@status", 1);
+                        command.Parameters.AddWithValue("@bookingId", bookingId);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Booking approved successfully!");
+
+
+                            displayBookings();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error: Booking approval failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a booking to approve.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
             }
 
-        }
-
         private void rejectBtn_Click(object sender, EventArgs e)
         {
+            if(dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                int bookingId = Convert.ToInt32(selectedRow.Cells["id"].Value);
 
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                string query = "DELETE FROM Bookings where id = @bookingId";
+
+                SqlCommand command = new SqlCommand(query,connection);
+                command.Parameters.AddWithValue("@bookingId",bookingId);
+
+                int rowsAffected = command.ExecuteNonQuery();
+               
+                if(rowsAffected == 0){
+                    MessageBox.Show("Error rejecting booking.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                connection.Close();
+
+                displayBookings();
+            }
         }
     }
 }

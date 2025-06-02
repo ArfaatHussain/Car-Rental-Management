@@ -7,3 +7,4 @@ D:\Software Engineering\BSE 6th Semester Course\Visual Programming\Car Rental Ma
 D:\Software Engineering\BSE 6th Semester Course\Visual Programming\Car Rental Management\Car Rental Management\obj\x86\Debug\Car Rental Management.pdb
 D:\Software Engineering\BSE 6th Semester Course\Visual Programming\Car Rental Management\Car Rental Management\obj\x86\Debug\Car_Rental_Management.AdminConsole.resources
 D:\Software Engineering\BSE 6th Semester Course\Visual Programming\Car Rental Management\Car Rental Management\obj\x86\Debug\Car_Rental_Management.ViewBookings.resources
+D:\Software Engineering\BSE 6th Semester Course\Visual Programming\Car Rental Management\Car Rental Management\obj\x86\Debug\Car Rental Management.csprojResolveAssemblyReference.cache

@@ -53,7 +53,6 @@
             this.label1.Size = new System.Drawing.Size(169, 49);
             this.label1.TabIndex = 1;
             this.label1.Text = "Bookings";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // approveBtn
             // 

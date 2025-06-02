@@ -40,20 +40,14 @@ namespace Car_Rental_Management
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
-            string query = @"
-                            INSERT INTO Cars (make, model, year, pricePerDay, available)
+            string query = @"INSERT INTO Bookings (startDate, endDate, status, carId, customerId)
                             VALUES
-                                ('Toyota', 'Corolla', 2020, 35.00, 1),
-                                ('Honda', 'Civic', 2021, 40.00, 1),
-                                ('Ford', 'Focus', 2019, 30.00, 0),
-                                ('Chevrolet', 'Malibu', 2018, 45.00, 0),
-                                ('BMW', 'X5', 2022, 80.00, 1),
-                                ('Audi', 'A4', 2020, 60.00, 0),
-                                ('Hyundai', 'Elantra', 2021, 38.00, 1),
-                                ('Mercedes', 'E-Class', 2019, 75.00, 0),
-                                ('Nissan', 'Altima', 2020, 42.00, 1),
-                                ('Volkswagen', 'Passat', 2021, 50.00, 1);
-                            ";
+                            ('2025-06-01', '2025-06-05', 0, 1, 1),
+                            ('2025-06-02', '2025-06-06', 1, 2, 2),
+                            ('2025-06-10', '2025-06-15', 0, 3, 3),
+                            ('2025-06-12', '2025-06-16', 1, 4, 4),
+                            ('2025-06-20', '2025-06-25', 0, 5, 5);
+";
             connection.Open();
             SqlCommand command = new SqlCommand(query,connection);
             command.ExecuteNonQuery();
