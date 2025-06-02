@@ -12,7 +12,6 @@ namespace Car_Rental_Management
 {
     public partial class AdminConsole : Form
     {
-        string connectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=C:\Users\Arfaat\Documents\CarRentalManagement.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True";
         public AdminConsole()
         {
             InitializeComponent();
@@ -20,7 +19,7 @@ namespace Car_Rental_Management
 
         private void displayCars()
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+            SqlConnection connection = new SqlConnection(GlobalData.connectionString);
             string query = "SELECT * FROM cars;";
             SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
             DataTable dt = new DataTable();
@@ -38,20 +37,8 @@ namespace Car_Rental_Management
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
-
-            string query = @"INSERT INTO Bookings (startDate, endDate, status, carId, customerId)
-                            VALUES
-                            ('2025-06-01', '2025-06-05', 0, 1, 1),
-                            ('2025-06-02', '2025-06-06', 1, 2, 2),
-                            ('2025-06-10', '2025-06-15', 0, 3, 3),
-                            ('2025-06-12', '2025-06-16', 1, 4, 4),
-                            ('2025-06-20', '2025-06-25', 0, 5, 5);
-";
-            connection.Open();
-            SqlCommand command = new SqlCommand(query,connection);
-            command.ExecuteNonQuery();
-            connection.Close();
+            new AddCar().Show();
+            this.Hide();
 
         }
 
@@ -64,6 +51,60 @@ namespace Car_Rental_Management
         private void viewPaymentBtn_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void AdminConsole_Load(object sender, EventArgs e)
+        {
+            displayCars();
+        }
+
+        private void backBtn_Click(object sender, EventArgs e)
+        {
+            new Main().Show();
+            this.Hide();
+        }
+
+        private void editBtn_Click(object sender, EventArgs e)
+        {
+            if(dataGridView1.SelectedRows.Count > 0){
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                int id = Convert.ToInt16(selectedRow.Cells["id"].Value);
+                string make = selectedRow.Cells["make"].Value.ToString();
+                string model = selectedRow.Cells["model"].Value.ToString();
+                int year =  Convert.ToInt16(selectedRow.Cells["year"].Value);
+                double pricePerDay = Convert.ToDouble(selectedRow.Cells["pricePerDay"].Value);
+                int available = Convert.ToInt16(selectedRow.Cells["available"].Value);
+
+                new EditCar(id,make,model,year,pricePerDay,available).Show();
+                this.Hide();
+            }
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            if(dataGridView1.SelectedRows.Count > 0){
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                int carId = Convert.ToInt16(selectedRow.Cells["id"].Value);
+
+                SqlConnection connection = new SqlConnection(GlobalData.connectionString);
+                connection.Open();
+                string query = "DELETE FROM Cars WHERE id = @id";
+
+                SqlCommand command = new SqlCommand(query,connection);
+                command.Parameters.AddWithValue("@id",carId);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if(rowsAffected == 0){
+
+                    MyDialogBox.showErrorMessage("Error Deleting car.");
+                    return;
+                }
+
+                displayCars();
+
+               
+            }
         }
 
     }

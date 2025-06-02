@@ -36,6 +36,7 @@
             this.deleteBtn = new System.Windows.Forms.Button();
             this.viewBookingBtn = new System.Windows.Forms.Button();
             this.viewPaymentBtn = new System.Windows.Forms.Button();
+            this.backBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -75,7 +76,9 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(906, 304);
             this.dataGridView1.TabIndex = 0;
@@ -88,6 +91,7 @@
             this.editBtn.TabIndex = 5;
             this.editBtn.Text = "Edit";
             this.editBtn.UseVisualStyleBackColor = true;
+            this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
             // 
             // deleteBtn
             // 
@@ -97,6 +101,7 @@
             this.deleteBtn.TabIndex = 6;
             this.deleteBtn.Text = "Delete";
             this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // viewBookingBtn
             // 
@@ -118,11 +123,22 @@
             this.viewPaymentBtn.UseVisualStyleBackColor = true;
             this.viewPaymentBtn.Click += new System.EventHandler(this.viewPaymentBtn_Click);
             // 
+            // backBtn
+            // 
+            this.backBtn.Location = new System.Drawing.Point(30, 33);
+            this.backBtn.Name = "backBtn";
+            this.backBtn.Size = new System.Drawing.Size(98, 41);
+            this.backBtn.TabIndex = 9;
+            this.backBtn.Text = "Back";
+            this.backBtn.UseVisualStyleBackColor = true;
+            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
+            // 
             // AdminConsole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 609);
+            this.Controls.Add(this.backBtn);
             this.Controls.Add(this.viewPaymentBtn);
             this.Controls.Add(this.viewBookingBtn);
             this.Controls.Add(this.deleteBtn);
@@ -133,6 +149,7 @@
             this.Name = "AdminConsole";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdminConsole";
+            this.Load += new System.EventHandler(this.AdminConsole_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -150,5 +167,6 @@
         private System.Windows.Forms.Button deleteBtn;
         private System.Windows.Forms.Button viewBookingBtn;
         private System.Windows.Forms.Button viewPaymentBtn;
+        private System.Windows.Forms.Button backBtn;
     }
 }

@@ -11,8 +11,6 @@ namespace Car_Rental_Management
 {
     public partial class ViewBookings : Form
     {
-        string connectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=C:\Users\Arfaat\Documents\CarRentalManagement.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True";
-
         public ViewBookings()
         {
             InitializeComponent();
@@ -20,7 +18,7 @@ namespace Car_Rental_Management
 
         private void displayBookings()
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+            SqlConnection connection = new SqlConnection(GlobalData.connectionString);
 
             // Fetching all the bookings which are pending 0 = pending, 1 = approved
             string query = @"
@@ -90,12 +88,8 @@ namespace Car_Rental_Management
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
                 int bookingId = Convert.ToInt32(selectedRow.Cells["id"].Value);
                 string status = selectedRow.Cells["status"].Value.ToString();
-                if (status.ToLower() == "approved")
-                {
-                    MessageBox.Show("This booking is already approved.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                    return;
-                }
-                SqlConnection connection = new SqlConnection(connectionString);
+
+                SqlConnection connection = new SqlConnection(GlobalData.connectionString);
                 string query = "UPDATE Bookings SET status = @status WHERE id = @bookingId";
                   try
                     {
@@ -106,22 +100,17 @@ namespace Car_Rental_Management
                         command.Parameters.AddWithValue("@bookingId", bookingId);
 
                         int rowsAffected = command.ExecuteNonQuery();
-
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Booking approved successfully!");
-
-
-                            displayBookings();
+                     
+                        if(rowsAffected == 0){
+                            MyDialogBox.showErrorMessage("Error approving booking.");
+                            return;
                         }
-                        else
-                        {
-                            MessageBox.Show("Error: Booking approval failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        displayBookings();
+
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MyDialogBox.showErrorMessage("Error: " + ex.Message);
                     }
                     finally
                     {
@@ -130,7 +119,7 @@ namespace Car_Rental_Management
                 }
                 else
                 {
-                    MessageBox.Show("Please select a booking to approve.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyDialogBox.showErrorMessage("Please select a booking to approve.");
                 }
 
             }
@@ -142,7 +131,7 @@ namespace Car_Rental_Management
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
                 int bookingId = Convert.ToInt32(selectedRow.Cells["id"].Value);
 
-                SqlConnection connection = new SqlConnection(connectionString);
+                SqlConnection connection = new SqlConnection(GlobalData.connectionString);
                 connection.Open();
                 string query = "DELETE FROM Bookings where id = @bookingId";
 
@@ -152,13 +141,19 @@ namespace Car_Rental_Management
                 int rowsAffected = command.ExecuteNonQuery();
                
                 if(rowsAffected == 0){
-                    MessageBox.Show("Error rejecting booking.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyDialogBox.showErrorMessage("Error rejecting booking.");
                     return;
                 }
                 connection.Close();
 
                 displayBookings();
             }
+        }
+
+        private void backBtn_Click(object sender, EventArgs e)
+        {
+            new AdminConsole().Show();
+            this.Hide();
         }
     }
 }

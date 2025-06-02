@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.approveBtn = new System.Windows.Forms.Button();
             this.rejectBtn = new System.Windows.Forms.Button();
+            this.backBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,11 +75,22 @@
             this.rejectBtn.UseVisualStyleBackColor = true;
             this.rejectBtn.Click += new System.EventHandler(this.rejectBtn_Click);
             // 
+            // backBtn
+            // 
+            this.backBtn.Location = new System.Drawing.Point(21, 26);
+            this.backBtn.Name = "backBtn";
+            this.backBtn.Size = new System.Drawing.Size(114, 50);
+            this.backBtn.TabIndex = 4;
+            this.backBtn.Text = "Back";
+            this.backBtn.UseVisualStyleBackColor = true;
+            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
+            // 
             // ViewBookings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 604);
+            this.Controls.Add(this.backBtn);
             this.Controls.Add(this.rejectBtn);
             this.Controls.Add(this.approveBtn);
             this.Controls.Add(this.label1);
@@ -99,6 +111,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button approveBtn;
         private System.Windows.Forms.Button rejectBtn;
+        private System.Windows.Forms.Button backBtn;
 
     }
 }

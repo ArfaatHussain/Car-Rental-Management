@@ -46,12 +46,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddCar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddCar.Designer.cs">
+      <DependentUpon>AddCar.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminConsole.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AdminConsole.Designer.cs">
       <DependentUpon>AdminConsole.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditCar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditCar.Designer.cs">
+      <DependentUpon>EditCar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyDialogBox.cs" />
+    <Compile Include="GlobalData.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,8 +86,14 @@
     <Compile Include="ViewBookings.Designer.cs">
       <DependentUpon>ViewBookings.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddCar.resx">
+      <DependentUpon>AddCar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminConsole.resx">
       <DependentUpon>AdminConsole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditCar.resx">
+      <DependentUpon>EditCar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
