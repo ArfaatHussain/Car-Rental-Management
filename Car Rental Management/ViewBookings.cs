@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 namespace Car_Rental_Management
 {
     public partial class ViewBookings : Form
@@ -18,7 +19,7 @@ namespace Car_Rental_Management
 
         private void displayBookings()
         {
-            SqlConnection connection = new SqlConnection(GlobalData.connectionString);
+            MySqlConnection connection = new MySqlConnection(GlobalData.connectionString);
 
             // Fetching all the bookings which are pending 0 = pending, 1 = approved
             string query = @"
@@ -44,9 +45,9 @@ namespace Car_Rental_Management
             {
                 connection.Open();
 
-                SqlCommand command = new SqlCommand(query, connection);
+                MySqlCommand command = new MySqlCommand(query, connection);
 
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                 DataTable dt = new DataTable();
 
                 adapter.Fill(dt);
@@ -89,13 +90,13 @@ namespace Car_Rental_Management
                 int bookingId = Convert.ToInt32(selectedRow.Cells["id"].Value);
                 string status = selectedRow.Cells["status"].Value.ToString();
 
-                SqlConnection connection = new SqlConnection(GlobalData.connectionString);
+                MySqlConnection connection = new MySqlConnection(GlobalData.connectionString);
                 string query = "UPDATE Bookings SET status = @status WHERE id = @bookingId";
                   try
                     {
                      
                         connection.Open();
-                        SqlCommand command = new SqlCommand(query, connection);
+                        MySqlCommand command = new MySqlCommand(query, connection);
                         command.Parameters.AddWithValue("@status", 1);
                         command.Parameters.AddWithValue("@bookingId", bookingId);
 
@@ -131,11 +132,11 @@ namespace Car_Rental_Management
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
                 int bookingId = Convert.ToInt32(selectedRow.Cells["id"].Value);
 
-                SqlConnection connection = new SqlConnection(GlobalData.connectionString);
+                MySqlConnection connection = new MySqlConnection(GlobalData.connectionString);
                 connection.Open();
                 string query = "DELETE FROM Bookings where id = @bookingId";
 
-                SqlCommand command = new SqlCommand(query,connection);
+                MySqlCommand command = new MySqlCommand(query,connection);
                 command.Parameters.AddWithValue("@bookingId",bookingId);
 
                 int rowsAffected = command.ExecuteNonQuery();

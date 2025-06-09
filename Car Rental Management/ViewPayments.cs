@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
+using MySql.Data.MySqlClient;
 namespace Car_Rental_Management
 {
     public partial class ViewPayments : Form
@@ -26,12 +26,12 @@ namespace Car_Rental_Management
 
         private void ViewPayments_Load(object sender, EventArgs e)
         {
-            SqlConnection connection = new SqlConnection(GlobalData.connectionString);
+            MySqlConnection connection = new MySqlConnection(GlobalData.connectionString);
 
             string query = @"SELECT  p.id AS id,
                             cust.name AS customerName,
                             c.model AS carModel, 
-                            p.amount AS amount,
+                            b.amount AS amount,
                             p.paymentDate AS paymentDate, 
                             p.paymentStatus AS paymentStatus           
                             FROM Payments AS p
@@ -40,9 +40,9 @@ namespace Car_Rental_Management
                             INNER JOIN Cars AS c ON c.id = b.carId
                             ";
 
-            SqlCommand command = new SqlCommand(query,connection);
+            MySqlCommand command = new MySqlCommand(query,connection);
 
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
             initialData = new DataTable();
 
             adapter.Fill(initialData);

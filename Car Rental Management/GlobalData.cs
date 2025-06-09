@@ -7,6 +7,6 @@ namespace Car_Rental_Management
 {
     class GlobalData
     {
-       public static string connectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=C:\Users\Arfaat\Documents\CarRentalManagement.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True";
+       public static string connectionString = "server=localhost;uid=root;pwd=mysql@0000;database=car_rental_management";
     }
 }

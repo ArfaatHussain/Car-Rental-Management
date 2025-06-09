@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
+using MySql.Data.MySqlClient;
 namespace Car_Rental_Management
 {
     public partial class EditCar : Form
@@ -77,7 +77,7 @@ namespace Car_Rental_Management
             {
                 available = 1;
             }
-            SqlConnection connection = new SqlConnection(GlobalData.connectionString);
+            MySqlConnection connection = new MySqlConnection(GlobalData.connectionString);
 
             connection.Open();
 
@@ -88,7 +88,7 @@ namespace Car_Rental_Management
                             pricePerDay = @pricePerDay,
                             available = @available
                             WHERE id = @id";
-            SqlCommand command = new SqlCommand(query,connection);
+            MySqlCommand command = new MySqlCommand(query,connection);
             command.Parameters.AddWithValue("@id",this.id);
             command.Parameters.AddWithValue("@make", make);
             command.Parameters.AddWithValue("@model", model);

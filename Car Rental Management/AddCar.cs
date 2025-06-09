@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 namespace Car_Rental_Management
 {
     public partial class AddCar : Form
@@ -27,12 +27,12 @@ namespace Car_Rental_Management
                 available = 1;
             }
 
-            SqlConnection connection = new SqlConnection(GlobalData.connectionString);
+            MySqlConnection connection = new MySqlConnection(GlobalData.connectionString);
             connection.Open();
             string query = @"INSERT INTO Cars (make,model,year,pricePerDay,available)
             VALUES (@make,@model,@year,@pricePerDay,@available)";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@make",make);
             command.Parameters.AddWithValue("@model", model);
             command.Parameters.AddWithValue("@year", year);

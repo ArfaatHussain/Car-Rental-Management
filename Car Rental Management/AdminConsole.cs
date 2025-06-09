@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
+using MySql.Data.MySqlClient;
 namespace Car_Rental_Management
 {
     public partial class AdminConsole : Form
@@ -19,9 +19,9 @@ namespace Car_Rental_Management
 
         private void displayCars()
         {
-            SqlConnection connection = new SqlConnection(GlobalData.connectionString);
+            MySqlConnection connection = new MySqlConnection(GlobalData.connectionString);
             string query = "SELECT * FROM cars;";
-            SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection);
             DataTable dt = new DataTable();
             adapter.Fill(dt);
             dataGridView1.DataSource = dt;
@@ -87,11 +87,11 @@ namespace Car_Rental_Management
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
                 int carId = Convert.ToInt16(selectedRow.Cells["id"].Value);
 
-                SqlConnection connection = new SqlConnection(GlobalData.connectionString);
+                MySqlConnection connection = new MySqlConnection(GlobalData.connectionString);
                 connection.Open();
                 string query = "DELETE FROM Cars WHERE id = @id";
 
-                SqlCommand command = new SqlCommand(query,connection);
+                MySqlCommand command = new MySqlCommand(query,connection);
                 command.Parameters.AddWithValue("@id",carId);
 
                 int rowsAffected = command.ExecuteNonQuery();
