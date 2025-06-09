@@ -32,8 +32,8 @@ namespace Car_Rental_Management
                             cust.name AS customerName,
                             c.model AS carModel, 
                             b.amount AS amount,
-                            p.paymentDate AS paymentDate, 
-                            p.paymentStatus AS paymentStatus           
+                            b.paymentStatus AS paymentStatus,
+                            p.paymentDate AS paymentDate        
                             FROM Payments AS p
                             INNER JOIN Bookings AS b ON p.bookingId = b.id
                             INNER JOIN Customers AS cust ON cust.id = b.customerId
@@ -46,7 +46,6 @@ namespace Car_Rental_Management
             initialData = new DataTable();
 
             adapter.Fill(initialData);
-
 
             dataGridView1.DataSource = initialData;
 

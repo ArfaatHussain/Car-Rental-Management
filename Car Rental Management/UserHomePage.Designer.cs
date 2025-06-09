@@ -40,6 +40,7 @@
             clearBtn = new System.Windows.Forms.Button();
             button2 = new System.Windows.Forms.Button();
             button3 = new System.Windows.Forms.Button();
+            button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -73,7 +74,7 @@
             // 
             button1.Location = new System.Drawing.Point(909, 46);
             button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(112, 40);
+            button1.Size = new System.Drawing.Size(112, 54);
             button1.TabIndex = 3;
             button1.Text = "Logout";
             button1.UseVisualStyleBackColor = true;
@@ -91,17 +92,18 @@
             // 
             // searchBtn
             // 
-            searchBtn.Location = new System.Drawing.Point(738, 142);
+            searchBtn.Location = new System.Drawing.Point(753, 136);
             searchBtn.Name = "searchBtn";
-            searchBtn.Size = new System.Drawing.Size(112, 34);
+            searchBtn.Size = new System.Drawing.Size(112, 47);
             searchBtn.TabIndex = 5;
             searchBtn.Text = "search";
             searchBtn.UseVisualStyleBackColor = true;
+            searchBtn.Click += searchBtn_Click;
             // 
             // searchComboBox
             // 
             searchComboBox.FormattingEnabled = true;
-            searchComboBox.Items.AddRange(new object[] { "Name", "Model", "Make", "Price" });
+            searchComboBox.Items.AddRange(new object[] { "Model", "Make", "Price", "Year" });
             searchComboBox.Location = new System.Drawing.Point(186, 144);
             searchComboBox.Name = "searchComboBox";
             searchComboBox.Size = new System.Drawing.Size(131, 33);
@@ -125,9 +127,9 @@
             // 
             // clearBtn
             // 
-            clearBtn.Location = new System.Drawing.Point(876, 142);
+            clearBtn.Location = new System.Drawing.Point(909, 135);
             clearBtn.Name = "clearBtn";
-            clearBtn.Size = new System.Drawing.Size(112, 34);
+            clearBtn.Size = new System.Drawing.Size(112, 48);
             clearBtn.TabIndex = 9;
             clearBtn.Text = "clear";
             clearBtn.UseVisualStyleBackColor = true;
@@ -135,27 +137,40 @@
             // 
             // button2
             // 
-            button2.Location = new System.Drawing.Point(66, 233);
+            button2.Location = new System.Drawing.Point(399, 222);
             button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(443, 40);
+            button2.Size = new System.Drawing.Size(279, 51);
             button2.TabIndex = 10;
             button2.Text = "View Bookings";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
-            button3.Location = new System.Drawing.Point(578, 233);
+            button3.Location = new System.Drawing.Point(766, 222);
             button3.Name = "button3";
-            button3.Size = new System.Drawing.Size(443, 40);
+            button3.Size = new System.Drawing.Size(255, 51);
             button3.TabIndex = 11;
-            button3.Text = "View Bookings";
+            button3.Text = "View Accepted Bookings";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // button4
+            // 
+            button4.Location = new System.Drawing.Point(66, 222);
+            button4.Name = "button4";
+            button4.Size = new System.Drawing.Size(251, 51);
+            button4.TabIndex = 12;
+            button4.Text = "Add Booking";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // UserHomePage
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1061, 600);
+            Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(clearBtn);
@@ -191,5 +206,6 @@
         private System.Windows.Forms.Button clearBtn;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }

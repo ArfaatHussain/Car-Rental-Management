@@ -44,6 +44,9 @@ namespace Car_Rental_Management
                     int customerId = Convert.ToInt16(reader["id"]);
                     string customerName = Convert.ToString(reader["name"]);
                     string customerEmail = Convert.ToString(reader["email"]);
+                    GlobalData.customerName = customerName;
+                    GlobalData.customerEmail = customerEmail;
+                    GlobalData.customerId = customerId;
                     new UserHomePage(customerId,customerName,customerEmail).Show();
                     this.Hide();
                 }  

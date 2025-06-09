@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,16 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using MySql.Data.MySqlClient;
 namespace Car_Rental_Management
 {
-    public partial class CustomerPendingBookings : Form
+    public partial class CustomerAcceptedBookings : Form
     {
-        public CustomerPendingBookings()
+        public CustomerAcceptedBookings()
         {
             InitializeComponent();
         }
-
         private void displayBookings()
         {
             MySqlConnection connection = new MySqlConnection(GlobalData.connectionString);
@@ -34,11 +32,12 @@ namespace Car_Rental_Management
         b.amount AS bookingAmount
         FROM bookings AS b 
         INNER JOIN cars AS c ON c.id = b.carId
-        WHERE customerId = @customerId AND status = @status";
+        WHERE customerId = @id AND status = @status AND paymentStatus = @paymentStatus";
             MySqlCommand command = new MySqlCommand(query, connection);
 
-            command.Parameters.AddWithValue("@customerId", GlobalData.customerId);
-            command.Parameters.AddWithValue("@status", 0);
+            command.Parameters.AddWithValue("@id", GlobalData.customerId);
+            command.Parameters.AddWithValue("@status", 1);
+            command.Parameters.AddWithValue("@paymentStatus", 0);
 
             MySqlDataReader reader = command.ExecuteReader();
 
@@ -68,7 +67,7 @@ namespace Car_Rental_Management
             }
 
             dataGridView1.DataSource = availableCarsTable;
-            dataGridView1.Columns["bookingId"].HeaderText = "Booking ID";
+            dataGridView1.Columns["bookingId"].HeaderText = "Car ID";
             dataGridView1.Columns["carMake"].HeaderText = "Make";
             dataGridView1.Columns["carModel"].HeaderText = "Model";
             dataGridView1.Columns["carYear"].HeaderText = "Year";
@@ -79,43 +78,49 @@ namespace Car_Rental_Management
 
             connection.Close();
         }
-        private void CustomerPendingBookings_Load(object sender, EventArgs e)
+
+        private void CustomerAcceptedBookings_Load(object sender, EventArgs e)
         {
+
             displayBookings();
+        }
+
+        private void checkoutBtn_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MyDialogBox.showErrorMessage("Select any Booking first!");
+                return;
+            }
+
+            DataGridViewRow row = dataGridView1.SelectedRows[0];
+
+            int bookingId = Convert.ToInt16(row.Cells["bookingId"].Value);
+
+            MySqlConnection conn = new MySqlConnection(GlobalData.connectionString);
+            conn.Open();
+
+            string query = "UPDATE bookings SET paymentStatus = @paymentStatus WHERE customerId = @id";
+            MySqlCommand command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@paymentStatus", 1);
+            command.Parameters.AddWithValue("@id", GlobalData.customerId);
+
+            int rowsAffected = command.ExecuteNonQuery();
+
+            if (rowsAffected == 0)
+            {
+                MyDialogBox.showErrorMessage("Error in checkout process.");
+                return;
+            }
+
+            displayBookings();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             new UserHomePage().Show();
             this.Hide();
-        }
-
-        private void removeBtn_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count == 0)
-            {
-                MyDialogBox.showErrorMessage("Please select booking first!");
-                return;
-            }
-
-            DataGridViewRow row = dataGridView1.SelectedRows[0];
-            int bookingId = Convert.ToInt16(row.Cells["bookingId"].Value);
-            MySqlConnection connection = new MySqlConnection(GlobalData.connectionString);
-            connection.Open();
-
-            string query = "UPDATE bookings SET status = @status WHERE customerId = @customerId AND id = @bookingId";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@status",1);
-            command.Parameters.AddWithValue("@customerId",GlobalData.customerId);
-            command.Parameters.AddWithValue("@bookingId", bookingId);
-            int rowsAffected = command.ExecuteNonQuery();
-            if (rowsAffected == 0)
-            {
-                MyDialogBox.showErrorMessage("Booking not updated.");
-                return;
-            }
-            displayBookings();
-
         }
     }
 }

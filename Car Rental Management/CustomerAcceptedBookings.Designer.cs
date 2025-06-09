@@ -1,6 +1,6 @@
 ﻿namespace Car_Rental_Management
 {
-    partial class CustomerPendingBookings
+    partial class CustomerAcceptedBookings
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             label1 = new System.Windows.Forms.Label();
             dataGridView1 = new System.Windows.Forms.DataGridView();
-            removeBtn = new System.Windows.Forms.Button();
+            checkoutBtn = new System.Windows.Forms.Button();
             button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -39,54 +39,53 @@
             // 
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("Calibri", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            label1.Location = new System.Drawing.Point(312, 47);
+            label1.Location = new System.Drawing.Point(315, 44);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(427, 54);
+            label1.Size = new System.Drawing.Size(451, 54);
             label1.TabIndex = 0;
-            label1.Text = "Your Pending Bookings";
+            label1.Text = "Your Accepted Bookings";
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new System.Drawing.Point(-1, 242);
+            dataGridView1.Location = new System.Drawing.Point(-2, 260);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new System.Drawing.Size(1055, 359);
+            dataGridView1.Size = new System.Drawing.Size(1062, 338);
             dataGridView1.TabIndex = 1;
             // 
-            // removeBtn
+            // checkoutBtn
             // 
-            removeBtn.Location = new System.Drawing.Point(276, 137);
-            removeBtn.Name = "removeBtn";
-            removeBtn.Size = new System.Drawing.Size(510, 48);
-            removeBtn.TabIndex = 2;
-            removeBtn.Text = "Remove";
-            removeBtn.UseVisualStyleBackColor = true;
-            removeBtn.Click += removeBtn_Click;
+            checkoutBtn.Location = new System.Drawing.Point(241, 164);
+            checkoutBtn.Name = "checkoutBtn";
+            checkoutBtn.Size = new System.Drawing.Size(553, 49);
+            checkoutBtn.TabIndex = 2;
+            checkoutBtn.Text = "Checkout";
+            checkoutBtn.UseVisualStyleBackColor = true;
+            checkoutBtn.Click += checkoutBtn_Click;
             // 
             // button1
             // 
-            button1.Location = new System.Drawing.Point(899, 47);
+            button1.Location = new System.Drawing.Point(926, 44);
             button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(112, 40);
-            button1.TabIndex = 4;
+            button1.Size = new System.Drawing.Size(112, 46);
+            button1.TabIndex = 3;
             button1.Text = "Back";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // CustomerPendingBookings
+            // CustomerAcceptedBookings
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1054, 599);
+            ClientSize = new System.Drawing.Size(1059, 597);
             Controls.Add(button1);
-            Controls.Add(removeBtn);
+            Controls.Add(checkoutBtn);
             Controls.Add(dataGridView1);
             Controls.Add(label1);
-            Name = "CustomerPendingBookings";
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "CustomerBookings";
-            Load += CustomerPendingBookings_Load;
+            Name = "CustomerAcceptedBookings";
+            Text = "CustomerAcceptedBookings";
+            Load += CustomerAcceptedBookings_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -96,7 +95,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button removeBtn;
+        private System.Windows.Forms.Button checkoutBtn;
         private System.Windows.Forms.Button button1;
     }
 }

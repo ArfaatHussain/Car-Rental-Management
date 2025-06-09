@@ -24,7 +24,7 @@ namespace Car_Rental_Management
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new UserHomePage().Show();
+            new UserLogin().Show();
             this.Hide();
         }
     }

@@ -32,9 +32,9 @@ namespace Car_Rental_Management
                             c.make AS carMake,
                             c.year AS carYear,
                             c.model AS carModel,
-                            c.pricePerDay AS carPricePerDay,
                             b.startDate AS startDate, 
                             b.endDate AS endDate,
+                            b.amount AS bookingAmount,
                             b.status AS status
                         FROM Bookings AS b
                         INNER JOIN Cars AS c ON b.carId = c.id
@@ -62,7 +62,7 @@ namespace Car_Rental_Management
                 dataGridView1.Columns["carMake"].HeaderText = "Car Make";
                 dataGridView1.Columns["carYear"].HeaderText = "Car Year";
                 dataGridView1.Columns["carModel"].HeaderText = "Car Model";
-                dataGridView1.Columns["carPricePerDay"].HeaderText = "Price Per Day";
+                dataGridView1.Columns["bookingAmount"].HeaderText = "Total Amount";
                 dataGridView1.Columns["startDate"].HeaderText = "Start Date";
                 dataGridView1.Columns["endDate"].HeaderText = "End Date";
                 dataGridView1.Columns["status"].HeaderText = "Booking Status";
