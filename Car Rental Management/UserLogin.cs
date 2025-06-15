@@ -32,8 +32,8 @@ namespace Car_Rental_Management
             string query = "SELECT * FROM customers WHERE email = @email AND password = @password";
             MySqlCommand command = new MySqlCommand(query, connection);
 
-            command.Parameters.AddWithValue("@email",email);
-            command.Parameters.AddWithValue("@password",password);
+            command.Parameters.AddWithValue("@email", email);
+            command.Parameters.AddWithValue("@password", password);
 
             MySqlDataReader reader = command.ExecuteReader();
 
@@ -47,14 +47,23 @@ namespace Car_Rental_Management
                     GlobalData.customerName = customerName;
                     GlobalData.customerEmail = customerEmail;
                     GlobalData.customerId = customerId;
-                    new UserHomePage(customerId,customerName,customerEmail).Show();
+                    GlobalData.customerAddress = Convert.ToString(reader["address"]);
+                    GlobalData.customerPhone = Convert.ToString(reader["phone"]);
+                    GlobalData.customerPassword = Convert.ToString(reader["password"]);
+                    new UserHomePage().Show();
                     this.Hide();
-                }  
+                }
             }
             else
             {
                 MyDialogBox.showErrorMessage("Wrong username or password");
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new Main().Show();
+            this.Hide();
         }
     }
 }

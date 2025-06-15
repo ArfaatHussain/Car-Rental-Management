@@ -21,13 +21,9 @@ namespace Car_Rental_Management
         public UserHomePage()
         {
             InitializeComponent();
-        }
-        public UserHomePage(int customerId, string customerName, string customerEmail)
-        {
-            InitializeComponent();
-            this.customerName = customerName;
-            this.customerId = customerId;
-            this.customerEmail = customerEmail;
+            this.customerId = GlobalData.customerId;
+            this.customerName = GlobalData.customerName;
+            this.customerEmail = GlobalData.customerEmail;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -170,6 +166,12 @@ namespace Car_Rental_Management
         private void searchBtn_Click(object sender, EventArgs e)
         {
             filterCars();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            new UpdateCustomerProfile().Show();
+            this.Hide();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Car_Rental_Management
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new AdminConsole().Show();
+            new AdminLogin().Show();
             this.Hide();
         }
 

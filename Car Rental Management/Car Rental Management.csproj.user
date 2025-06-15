@@ -11,6 +11,9 @@
     <Compile Update="AdminConsole.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="AdminLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="CustomerAcceptedBookings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -21,6 +24,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UpdateCustomerProfile.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UserHomePage.cs">

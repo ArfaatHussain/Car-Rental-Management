@@ -45,3 +45,5 @@ D:\Software Engineering\BSE 6th Semester Course\Visual Programming\Car Rental Ma
 D:\Software Engineering\BSE 6th Semester Course\Visual Programming\Car Rental Management\Car Rental Management\obj\Debug\net8.0-windows7.0\Car_Rental_Management.CustomerAcceptedBookings.resources
 D:\Software Engineering\BSE 6th Semester Course\Visual Programming\Car Rental Management\Car Rental Management\obj\Debug\net8.0-windows7.0\Car_Rental_Management.CustomerPendingBookings.resources
 D:\Software Engineering\BSE 6th Semester Course\Visual Programming\Car Rental Management\Car Rental Management\obj\Debug\net8.0-windows7.0\Car_Rental_Management.AddBooking.resources
+D:\Software Engineering\BSE 6th Semester Course\Visual Programming\Car Rental Management\Car Rental Management\obj\Debug\net8.0-windows7.0\Car_Rental_Management.AdminLogin.resources
+D:\Software Engineering\BSE 6th Semester Course\Visual Programming\Car Rental Management\Car Rental Management\obj\Debug\net8.0-windows7.0\Car_Rental_Management.UpdateCustomerProfile.resources
